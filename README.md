@@ -1,2 +1,1 @@
-# haskell-book-solutions
-Just my own notes and solutions here
+This repository is my own solutions to the [haskell book](https://haskellbook.com/).
