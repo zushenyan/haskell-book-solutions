@@ -29,14 +29,17 @@ library
   exposed-modules:
       Lib
       Eq
+      ElectricTypealoo
+      GrabBag
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
       src
       src/ch6
+      src/ch7
   build-depends:
       base >=4.7 && <5
-  ghc-options: -Wall
+  -- ghc-options: -Wall
   default-language: Haskell2010
 
 executable haskell-book-solutions-exe
@@ -45,7 +48,8 @@ executable haskell-book-solutions-exe
       Paths_haskell_book_solutions
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  -- ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall
   build-depends:
       base >=4.7 && <5
     , haskell-book-solutions
@@ -58,7 +62,8 @@ test-suite haskell-book-solutions-test
       Paths_haskell_book_solutions
   hs-source-dirs:
       test
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  -- ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall
   build-depends:
       base >=4.7 && <5
     , haskell-book-solutions
