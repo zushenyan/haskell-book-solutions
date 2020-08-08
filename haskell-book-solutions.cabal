@@ -31,6 +31,9 @@ library
       Eq
       ElectricTypealoo
       GrabBag
+      VarietyPack
+      CasePractice
+      Ch7ChapterExercises
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
