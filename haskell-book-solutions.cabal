@@ -34,12 +34,15 @@ library
       VarietyPack
       CasePractice
       Ch7ChapterExercises
+      Ch8ChapterExercises
+      WordNumber
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
       src
       src/ch6
       src/ch7
+      src/ch8
   build-depends:
       base >=4.7 && <5
   -- ghc-options: -Wall
