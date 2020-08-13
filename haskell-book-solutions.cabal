@@ -36,6 +36,8 @@ library
       Ch7ChapterExercises
       Ch8ChapterExercises
       WordNumber
+      EnumFromTo
+      TheFearfulSymmetry
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
@@ -43,6 +45,7 @@ library
       src/ch6
       src/ch7
       src/ch8
+      src/ch9
   build-depends:
       base >=4.7 && <5
   -- ghc-options: -Wall
