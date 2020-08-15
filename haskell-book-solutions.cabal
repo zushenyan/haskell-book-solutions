@@ -38,6 +38,7 @@ library
       WordNumber
       EnumFromTo
       TheFearfulSymmetry
+      SquareCube
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
