@@ -39,6 +39,11 @@ library
       EnumFromTo
       TheFearfulSymmetry
       SquareCube
+      MoreBottoms
+      Filtering
+      ZippingExercises
+      Ch9Exercises
+      Cipher
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
