@@ -55,6 +55,11 @@ library
       Ch11ChapterExercises
       Phone
       Hutton
+      StringProcessing
+      ValidateWord
+      Natural
+      MaybeLib
+      EitherLib
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
@@ -65,6 +70,7 @@ library
       src/ch9
       src/ch10
       src/ch11
+      src/ch12
   build-depends:
       base >=4.7 && <5,
       time,
