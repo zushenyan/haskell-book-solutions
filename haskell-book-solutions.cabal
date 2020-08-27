@@ -53,6 +53,8 @@ library
       Programmers
       BinaryTree
       Ch11ChapterExercises
+      Phone
+      Hutton
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
