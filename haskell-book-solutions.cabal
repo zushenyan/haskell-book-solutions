@@ -65,6 +65,8 @@ library
       OtherThanList
       Hangman
       InteractiveCipher
+      Palindrome
+      Ch13Exercises
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
