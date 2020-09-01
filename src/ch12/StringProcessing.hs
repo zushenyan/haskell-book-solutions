@@ -1,5 +1,3 @@
-{-# OPTIONS_GHC -fwarn-incomplete-patterns #-}
-
 module StringProcessing where
 
 -- 1.

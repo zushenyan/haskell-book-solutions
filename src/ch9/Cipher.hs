@@ -1,4 +1,8 @@
-module Cipher where
+module Cipher
+  ( ceaser
+  , unceaser
+  )
+where
 
 import           Data.Char
 
@@ -13,5 +17,5 @@ shift num char = chr newChar
 ceaser :: Int -> String -> String
 ceaser shiftNum = map (shift shiftNum)
 
-unCeaser :: Int -> String -> String
-unCeaser shiftNum = map (shift $ negate shiftNum)
+unceaser :: Int -> String -> String
+unceaser shiftNum = map (shift $ negate shiftNum)

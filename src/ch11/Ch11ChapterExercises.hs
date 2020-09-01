@@ -1,6 +1,10 @@
 {-# OPTIONS_GHC -fwarn-incomplete-patterns #-}
 
-module Ch11ChapterExercises where
+module Ch11ChapterExercises
+  ( vigCeaser
+  , vigDeceaser
+  )
+where
 
 import           Data.List
 import           Data.List.Split
@@ -31,11 +35,11 @@ restoreSpaces originalStr = insertSpaces (elemIndices ' ' originalStr)
 
 vigCeaser :: String -> String -> String
 vigCeaser k str = restoreSpaces str transformedStr
-  where transformedStr = map (\(p, k) -> vigEncrypt p k) (zipKeyword str k)
+  where transformedStr = map (uncurry vigEncrypt) (zipKeyword str k)
 
 vigDeceaser :: String -> String -> String
 vigDeceaser k str = restoreSpaces str transformedStr
-  where transformedStr = map (\(c, k) -> vigDecrypt c k) (zipKeyword str k)
+  where transformedStr = map (uncurry vigDecrypt) (zipKeyword str k)
 
 -- As-patterns
 -- 1.

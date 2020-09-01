@@ -20,6 +20,7 @@ build-type:     Simple
 extra-source-files:
     README.md
     ChangeLog.md
+    data/dict.txt
 
 source-repository head
   type: git
@@ -60,6 +61,10 @@ library
       Natural
       MaybeLib
       EitherLib
+      Iterate
+      OtherThanList
+      Hangman
+      InteractiveCipher
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
@@ -71,10 +76,12 @@ library
       src/ch10
       src/ch11
       src/ch12
+      src/ch13
   build-depends:
       base >=4.7 && <5,
       time,
-      split
+      split,
+      random
   -- ghc-options: -fwarn-incomplete-patterns
   default-language: Haskell2010
 
