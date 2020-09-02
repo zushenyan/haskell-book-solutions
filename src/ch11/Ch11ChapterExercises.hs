@@ -1,18 +1,20 @@
 {-# OPTIONS_GHC -fwarn-incomplete-patterns #-}
 
 module Ch11ChapterExercises
-  ( vigCeaser
-  , vigDeceaser
+  ( vigCeaser,
+    vigDeceaser,
   )
 where
 
-import           Data.List
-import           Data.List.Split
-import           Data.Char
+import Data.Char
+import Data.List
+import Data.List.Split
 
 -- Ciphers
 templateDecrypt = "MEET AT DAWN"
+
 templateEncrypt = "MPPR AE OYWY"
+
 templateKeyword = "ALLY"
 
 zipKeyword :: String -> String -> [(Char, Char)]
@@ -34,20 +36,25 @@ restoreSpaces :: String -> String -> String
 restoreSpaces originalStr = insertSpaces (elemIndices ' ' originalStr)
 
 vigCeaser :: String -> String -> String
+vigCeaser [] str = str
 vigCeaser k str = restoreSpaces str transformedStr
-  where transformedStr = map (uncurry vigEncrypt) (zipKeyword str k)
+  where
+    transformedStr = map (uncurry vigEncrypt) (zipKeyword str k)
 
 vigDeceaser :: String -> String -> String
+vigDeceaser [] str = str
 vigDeceaser k str = restoreSpaces str transformedStr
-  where transformedStr = map (uncurry vigDecrypt) (zipKeyword str k)
+  where
+    transformedStr = map (uncurry vigDecrypt) (zipKeyword str k)
 
 -- As-patterns
 -- 1.
 isSubseqOf :: (Eq a) => [a] -> [a] -> Bool
-isSubseqOf [] _  = True
-isSubseqOf _  [] = False
+isSubseqOf [] _ = True
+isSubseqOf _ [] = False
 isSubseqOf xt@(x : xs) (y : ys) =
   if x == y then isSubseqOf xs ys else isSubseqOf xt ys
+
 -- isSubseqOf []       []      = True
 -- isSubseqOf (x : _)  []      = False
 -- isSubseqOf []       (y : _) = True
@@ -68,22 +75,22 @@ testIsSubseqOf = do
 -- 2.
 capitalizeWords :: String -> [(String, String)]
 capitalizeWords = map pred . words
- where
-  pred :: String -> (String, String)
-  pred []          = ("", "")
-  pred xt@(x : xs) = (xt, toUpper x : xs)
+  where
+    pred :: String -> (String, String)
+    pred [] = ("", "")
+    pred xt@(x : xs) = (xt, toUpper x : xs)
 
 testCapitalizeWords :: IO ()
 testCapitalizeWords = do
-  print
-    $  capitalizeWords "hello world"
-    == [("hello", "Hello"), ("world", "World")]
+  print $
+    capitalizeWords "hello world"
+      == [("hello", "Hello"), ("world", "World")]
   return ()
 
 -- Language exercises
 -- 1.
 capitalizeWord :: String -> String
-capitalizeWord ""       = ""
+capitalizeWord "" = ""
 capitalizeWord (x : xs) = toUpper x : xs
 
 -- 2.

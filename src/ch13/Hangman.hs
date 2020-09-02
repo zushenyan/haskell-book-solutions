@@ -1,19 +1,22 @@
 module Hangman where
 
-import           Control.Monad                  ( forever
-                                                , when
-                                                )
-import           Data.Char                      ( toLower )
-import           Data.Maybe                     ( isJust )
-import           Data.List                      ( intersperse
-                                                , intersect
-                                                )
-import           System.Exit                    ( exitSuccess )
-import           System.IO                      ( BufferMode(NoBuffering)
-                                                , hSetBuffering
-                                                , stdout
-                                                )
-import           System.Random                  ( randomRIO )
+import Control.Monad
+  ( forever,
+    when,
+  )
+import Data.Char (toLower)
+import Data.List
+  ( intersect,
+    intersperse,
+  )
+import Data.Maybe (isJust)
+import System.Exit (exitSuccess)
+import System.IO
+  ( BufferMode (NoBuffering),
+    hSetBuffering,
+    stdout,
+  )
+import System.Random (randomRIO)
 
 newtype WordList = WordList [String]
 
@@ -39,8 +42,8 @@ gameWords :: IO WordList
 gameWords = do
   (WordList aw) <- allWords
   return . WordList $ filter wordLength aw
- where
-  wordLength w = let l = length w in l >= minWordLength && l <= maxWordLength
+  where
+    wordLength w = let l = length w in l >= minWordLength && l <= maxWordLength
 
 randomWords :: WordList -> IO String
 randomWords (WordList wl) = do
@@ -50,7 +53,7 @@ randomWords (WordList wl) = do
 randomWords' :: IO String
 randomWords' = gameWords >>= randomWords
 
-data Puzzle = Puzzle String [Maybe Char] String
+data Puzzle = Puzzle String [Maybe Char] String deriving (Eq)
 
 instance Show Puzzle where
   show (Puzzle _ discovered guessed) =
@@ -68,17 +71,19 @@ alreadyGuessed :: Puzzle -> Char -> Bool
 alreadyGuessed (Puzzle _ _ g) c = c `elem` g
 
 renderPuzzleChar :: Maybe Char -> Char
-renderPuzzleChar Nothing  = '_'
+renderPuzzleChar Nothing = '_'
 renderPuzzleChar (Just c) = c
 
 fillInCharacter :: Puzzle -> Char -> Puzzle
-fillInCharacter (Puzzle word fillInSoFar s) c = Puzzle word
-                                                       newFillInSoFar
-                                                       (c : s)
- where
-  zipper wordChar guessChar =
-    if wordChar == c then Just wordChar else guessChar
-  newFillInSoFar = zipWith zipper word fillInSoFar
+fillInCharacter (Puzzle word fillInSoFar s) c =
+  Puzzle
+    word
+    newFillInSoFar
+    (c : s)
+  where
+    zipper wordChar guessChar =
+      if wordChar == c then Just wordChar else guessChar
+    newFillInSoFar = zipWith zipper word fillInSoFar
 
 handleGuess :: Puzzle -> Char -> IO Puzzle
 handleGuess puzzle guess = do
@@ -97,16 +102,17 @@ handleGuess puzzle guess = do
 
 calcCharIncorrection :: Puzzle -> Int
 calcCharIncorrection (Puzzle wordToGuess _ guessed) = incorrection
- where
-  correction   = length $ guessed `intersect` wordToGuess
-  incorrection = length guessed - correction
+  where
+    correction = length $ guessed `intersect` wordToGuess
+    incorrection = length guessed - correction
 
 gameOver :: Puzzle -> IO ()
 gameOver puzzle@(Puzzle wordToGuess _ guessed) = when cond $ do
   print "You lose !"
   print $ "The word was: " ++ wordToGuess
   exitSuccess
-  where cond = calcCharIncorrection puzzle > maxWordLength
+  where
+    cond = calcCharIncorrection puzzle > maxWordLength
 
 gameWin :: Puzzle -> IO ()
 gameWin (Puzzle _ filledInSoFar _) = when (all isJust filledInSoFar) $ do
@@ -122,7 +128,7 @@ runGame puzzle = forever $ do
   guess <- getLine
   case guess of
     [c] -> handleGuess puzzle c >>= runGame
-    _   -> print "Your guess must be a single character."
+    _ -> print "Your guess must be a single character."
 
 main :: IO ()
 main = do
@@ -130,4 +136,3 @@ main = do
   word <- randomWords'
   let puzzle = freshPuzzle (fmap toLower word)
   runGame puzzle
-
