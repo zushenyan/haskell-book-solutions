@@ -72,6 +72,10 @@ library
       QuickCheckExercises
       HangmanTest
       CipherTest
+      OptionalMonoid
+      Madness
+      MaybeAnotherMonoid
+      Ch15Exercises
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
@@ -85,6 +89,7 @@ library
       src/ch12
       src/ch13
       src/ch14
+      src/ch15
   build-depends:
       base >=4.7 && <5
     , time
