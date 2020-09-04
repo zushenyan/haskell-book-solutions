@@ -24,3 +24,10 @@ A Monoid is also a Semigroup.
 leftIdentity a = a <> mempty == a
 rightIdentity a = mempty <> a == a
 ```
+
+### Functor Law
+
+```haskell
+identity f = fmap id f == f
+composition f g x = fmap g (fmap f x) == fmap (g . f) x
+```

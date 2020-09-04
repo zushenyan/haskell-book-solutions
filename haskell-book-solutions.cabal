@@ -80,6 +80,7 @@ library
       InstanceOfFunc
       Possibly
       ShortExercises
+      Ch16Exercises
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
