@@ -81,6 +81,8 @@ library
       Possibly
       ShortExercises
       Ch16Exercises
+      Lookups
+      IdentityInstance
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
@@ -96,6 +98,7 @@ library
       src/ch14
       src/ch15
       src/ch16
+      src/ch17
   build-depends:
       base >=4.7 && <5
     , time
