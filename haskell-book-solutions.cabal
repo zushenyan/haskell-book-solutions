@@ -83,6 +83,7 @@ library
       Ch16Exercises
       Lookups
       IdentityInstance
+      ConstantInstance
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
