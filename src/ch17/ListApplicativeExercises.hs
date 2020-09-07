@@ -48,34 +48,41 @@ runQc1 = quickBatch $ applicative go
     go = undefined
 
 -- ZipList
--- newtype ZipList' a = ZipList' [a] deriving (Eq, Show)
+newtype ZipList' a = ZipList' [a] deriving (Eq, Show)
 
--- instance Eq a => EqProp (ZipList' a) where
---   xs =-= ys = xs' `eq` ys'
---     where
---       xs' = let (ZipList' l) = xs in take 3000 l
---       ys' = let (ZipList' l) = ys in take 3000 l
+instance Functor ZipList' where
+  fmap f (ZipList' xs) = ZipList' (f <$> xs)
 
--- instance Functor ZipList' where
---   fmap _ (ZipList' []) = ZipList' []
---   fmap f (ZipList' xs) = ZipList' $ fmap f xs
+instance Applicative ZipList' where
+  pure x = ZipList' [x]
+  (<*>) (ZipList' fs) (ZipList' xs) = ZipList' $ go fs xs
+    where
+      go :: [a -> b] -> [a] -> [b]
+      go [] _ = []
+      go _ [] = []
+      go fs [x] = fs <*> pure x
+      go [f] xs = f <$> xs
+      go (f : fs) (x : xs) = f x : go fs xs
 
--- instance Applicative ZipList' where
---   pure x = ZipList' [x]
---   ZipList' (f:fs) <*> ZipList' (x:xs) = ZipList' (f x: fs <*> xs)
+instance Arbitrary a => Arbitrary (ZipList' a) where
+  arbitrary = do
+    x <- arbitrary
+    return $ ZipList' x
 
--- -- instance Applicative
+instance Eq a => EqProp (ZipList' a) where
+  (=-=) = eq
 
--- test2 :: IO ()
--- test2 =
---   let
---     a = ZipList' [(+9), (*2), (+8)]
---   in do
---     print $ (a <*> ZipList' [1..3]) == ZipList' [10,4,11]
---     print $ (a <*> pure 1) == ZipList' [10,4,11]
+test2 :: IO ()
+test2 =
+  let a = ZipList' [(+ 9), (* 2), (+ 8)]
+   in do
+        print $ a <*> ZipList' [1 .. 3]
+        print $ a <*> pure 1
+        print $ (a <*> ZipList' [1 .. 3]) == ZipList' [10, 4, 11]
+        print $ (a <*> pure 1) == ZipList' [10, 2, 9]
 
--- runQc2 :: IO ()
--- runQc2 = quickBatch $ applicative go
---   where
---     go :: ZipList' (Int, Int, Int)
---     go = undefined
+runQc2 :: IO ()
+runQc2 = quickBatch $ applicative go
+  where
+    go :: ZipList' (Int, Int, Int)
+    go = undefined
