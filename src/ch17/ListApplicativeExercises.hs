@@ -65,9 +65,7 @@ instance Applicative ZipList' where
       go (f : fs) (x : xs) = f x : go fs xs
 
 instance Arbitrary a => Arbitrary (ZipList' a) where
-  arbitrary = do
-    x <- arbitrary
-    return $ ZipList' x
+  arbitrary = ZipList' <$> arbitrary
 
 instance Eq a => EqProp (ZipList' a) where
   (=-=) = eq
