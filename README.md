@@ -11,23 +11,32 @@ Other solutions can be viewed [here](https://github.com/toraritte/haskell-book-s
 ### Semigroup Laws
 
 ```haskell
--- associative law
 associative a b c = (a <> b) <> c == a <> (b <> c)
 ```
 
-### Monoid Law
+### Monoid Laws
 
 A Monoid is also a Semigroup.
 
 ```haskell
--- identity law
 leftIdentity a = a <> mempty == a
 rightIdentity a = mempty <> a == a
 ```
 
-### Functor Law
+### Functor Laws
 
 ```haskell
 identity f = fmap id f == f
 composition f g x = fmap g (fmap f x) == fmap (g . f) x
+```
+
+### Applicative Laws
+
+An Applicative is also a Functor.
+
+```haskell
+identity v = pure id <*> v == v
+compositiion u v w = pure (.) <*> u <*> v <*> w == u <*> v <*> w
+homomorphism f x = pure f <*> pure x = pure (f x)
+interchange u y = u <*> pure y = pure ($ y) <*> u
 ```
