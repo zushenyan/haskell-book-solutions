@@ -87,6 +87,7 @@ library
       ListApplicativeExercises
       VariationsOnEither
       Ch17Exercises
+      BindExercise
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
@@ -103,6 +104,7 @@ library
       src/ch15
       src/ch16
       src/ch17
+      src/ch18
   build-depends:
       base >=4.7 && <5
     , time
