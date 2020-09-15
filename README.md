@@ -40,3 +40,13 @@ compositiion u v w = pure (.) <*> u <*> v <*> w == u <*> v <*> w
 homomorphism f x = pure f <*> pure x = pure (f x)
 interchange u y = u <*> pure y = pure ($ y) <*> u
 ```
+
+### Monad Laws
+
+An Monad is a also an Applicative (is also a Functor.)
+
+```haskell
+rightIdentity m = m >>= return == m
+leftIdentity x f = return x >>= f == f x
+associativity m f g = ((m >>= f) >>= g) == (m >>= (\x -> f x >>= g))
+```
