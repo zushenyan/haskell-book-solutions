@@ -88,6 +88,7 @@ library
       VariationsOnEither
       Ch17Exercises
       BindExercise
+      EitherMonad
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:

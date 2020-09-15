@@ -1,51 +1,79 @@
 module Lib where
 
-data GuessWhat = ChickenButt deriving (Eq, Show)
+f :: Int -> Maybe Int
+f 0 = Nothing
+f x = Just x
 
-data Id a = MkId a deriving (Eq, Show)
+g :: Int -> Maybe Int
+g i
+  | even i = Just $ i + 1
+  | otherwise = Nothing
 
-data Product a b = Product a b deriving (Eq, Show)
+h :: Int -> Maybe String
+h x = Just $ "10191" ++ show x
 
-data Sum a b = First a | Second b deriving (Eq, Show)
+-- doSomething :: Int -> Maybe (Int, Int, String)
+-- doSomething n = do
+--   a <- f n
+--   b <- g a
+--   c <- h b
+--   pure (a, b, c)
 
-data RecordProduct a b = RecordProduct
-  { pfirst :: a,
-    psecond :: b
-  }
-  deriving (Eq, Show)
+doSomething :: Int -> Maybe (Int, Int, String)
+doSomething n =
+  f n
+    >>= \a ->
+      g a
+        >>= \b ->
+          h b
+            >>= \c -> return (a, b, c)
 
-newtype NumCow = NumCow Int deriving (Eq, Show)
+-- data GuessWhat = ChickenButt deriving (Eq, Show)
 
-newtype NumPig = NumPig Int deriving (Eq, Show)
+-- data Id a = MkId a deriving (Eq, Show)
 
-newtype NumSheep = NumSheep Int deriving (Eq, Show)
+-- data Product a b = Product a b deriving (Eq, Show)
 
-data Farmhouse = Farmhouse NumCow NumPig deriving (Eq, Show)
+-- data Sum a b = First a | Second b deriving (Eq, Show)
 
-type Farmhouse' = Product NumCow NumPig
+-- data RecordProduct a b = RecordProduct
+--   { pfirst :: a,
+--     psecond :: b
+--   }
+--   deriving (Eq, Show)
 
-data BigFarmhouse = BigFarmhouse NumCow NumPig NumSheep deriving (Eq, Show)
+-- newtype NumCow = NumCow Int deriving (Eq, Show)
 
-type BigFarmhouse' = Product NumCow (Product NumPig NumSheep)
+-- newtype NumPig = NumPig Int deriving (Eq, Show)
 
-type Name = String
+-- newtype NumSheep = NumSheep Int deriving (Eq, Show)
 
-type Age = Int
+-- data Farmhouse = Farmhouse NumCow NumPig deriving (Eq, Show)
 
-type LovesMud = Bool
+-- type Farmhouse' = Product NumCow NumPig
 
-type PoundsOfWool = Int
+-- data BigFarmhouse = BigFarmhouse NumCow NumPig NumSheep deriving (Eq, Show)
 
-data CowInfo = CowInfo Name Age deriving (Eq, Show)
+-- type BigFarmhouse' = Product NumCow (Product NumPig NumSheep)
 
-data PigInfo = PigInfo Name Age LovesMud deriving (Eq, Show)
+-- type Name = String
 
-data SheepInfo = SheepInfo Name Age PoundsOfWool deriving (Eq, Show)
+-- type Age = Int
 
-data Animal
-  = Cow CowInfo
-  | Pig PigInfo
-  | Sheep SheepInfo
-  deriving (Eq, Show)
+-- type LovesMud = Bool
 
-type Animal' = Sum CowInfo (Sum PigInfo SheepInfo)
+-- type PoundsOfWool = Int
+
+-- data CowInfo = CowInfo Name Age deriving (Eq, Show)
+
+-- data PigInfo = PigInfo Name Age LovesMud deriving (Eq, Show)
+
+-- data SheepInfo = SheepInfo Name Age PoundsOfWool deriving (Eq, Show)
+
+-- data Animal
+--   = Cow CowInfo
+--   | Pig PigInfo
+--   | Sheep SheepInfo
+--   deriving (Eq, Show)
+
+-- type Animal' = Sum CowInfo (Sum PigInfo SheepInfo)
