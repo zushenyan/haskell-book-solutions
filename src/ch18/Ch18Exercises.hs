@@ -1,9 +1,10 @@
 module Ch18Exercises where
 
-import Control.Monad (join)
+import Control.Monad (join, liftM2)
+import Test.Hspec (describe, hspec, it, shouldBe)
 import Test.QuickCheck (Arbitrary (arbitrary), Gen, elements)
 import Test.QuickCheck.Checkers (EqProp (..), eq, quickBatch)
-import Test.QuickCheck.Classes (monad)
+import Test.QuickCheck.Classes (monad, monoid, semigroup)
 
 -- part 1
 -- 1.
@@ -94,12 +95,6 @@ runQc3 = quickBatch $ monad go
 -- 4.
 data List a = Nil | Cons a (List a) deriving (Eq, Show)
 
--- list :: List Integer
--- list = Cons 1 (Cons 2 (Cons 3 Nil))
-
--- listA :: List (Integer -> Integer)
--- listA = Cons (+ 1) (Cons (* 3) Nil)
-
 instance Semigroup (List a) where
   (<>) (Cons x Nil) y = Cons x y
   (<>) (Cons x xs) y = Cons x (xs <> y)
@@ -147,7 +142,43 @@ test4 = do
     f x = return $ x + 1
 
 runQc4 :: IO ()
-runQc4 = quickBatch $ monad go
+runQc4 = do
+  quickBatch $ monoid go
+  quickBatch $ monad go
   where
     go :: List (Int, Int, Int)
     go = undefined
+
+-- part 2
+-- 1.
+j :: Monad m => m (m a) -> m a
+j = join
+
+spec1 :: IO ()
+spec1 = hspec $ do
+  describe "j" $ do
+    it "[[1, 2], [], [3]]" $ do j [[1, 2], [], [3]] `shouldBe` [1, 2, 3]
+    it "Just (Just 1)" $ do j (Just (Just 1)) `shouldBe` Just 1
+    it "Just Nothing" $ do (j (Just Nothing) :: Maybe Int) `shouldBe` Nothing
+    it "Nothing" $ do (j Nothing :: Maybe Int) `shouldBe` Nothing
+
+--  2.
+l1 :: Monad m => (a -> b) -> m a -> m b
+l1 = fmap
+
+-- 3.
+l2 :: Monad m => (a -> b -> c) -> m a -> m b -> m c
+l2 = liftM2
+
+-- 4.
+a :: Monad m => m a -> m (a -> b) -> m b
+a = flip (<*>)
+
+-- 5.
+meh :: Monad m => [a] -> (a -> m b) -> m [b]
+meh [] _ = return []
+meh (x : xs) f = liftM2 (++) ((: []) <$> f x) (meh xs f)
+
+-- 6.
+flipType :: Monad m => [m a] -> m [a]
+flipType x = meh x id
