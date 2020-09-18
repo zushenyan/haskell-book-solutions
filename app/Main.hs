@@ -1,8 +1,6 @@
 module Main where
 
-import           Lib
+import qualified Ch19Exercise as Ch19E
 
 main :: IO ()
-main = do
-  print "hello"
-  return ()
+main = Ch19E.main
