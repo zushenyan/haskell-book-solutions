@@ -91,6 +91,8 @@ library
       EitherMonad
       Ch18Exercises
       Ch19Exercise
+      LibraryFunctions
+      Ch20Exercises
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
@@ -110,6 +112,7 @@ library
       src/ch18
       src/ch19
       src/ch20
+      src/ch21
   build-depends:
       base >=4.7 && <5
     , time
