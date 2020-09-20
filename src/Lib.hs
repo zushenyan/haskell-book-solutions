@@ -1,16 +1,25 @@
 module Lib where
 
-f :: Int -> Maybe Int
-f 0 = Nothing
-f x = Just x
+import Data.ByteString.Lazy hiding (map)
+import Network.Wreq
 
-g :: Int -> Maybe Int
-g i
-  | even i = Just $ i + 1
-  | otherwise = Nothing
+urls :: [String]
+urls = ["http://httpbin.org/ip", "http://httpbin.org/bytes/5"]
 
-h :: Int -> Maybe String
-h x = Just $ "10191" ++ show x
+mappingGet :: [IO (Response ByteString)]
+mappingGet = map get urls
+
+-- f :: Int -> Maybe Int
+-- f 0 = Nothing
+-- f x = Just x
+
+-- g :: Int -> Maybe Int
+-- g i
+--   | even i = Just $ i + 1
+--   | otherwise = Nothing
+
+-- h :: Int -> Maybe String
+-- h x = Just $ "10191" ++ show x
 
 -- doSomething :: Int -> Maybe (Int, Int, String)
 -- doSomething n = do
@@ -19,14 +28,14 @@ h x = Just $ "10191" ++ show x
 --   c <- h b
 --   pure (a, b, c)
 
-doSomething :: Int -> Maybe (Int, Int, String)
-doSomething n =
-  f n
-    >>= \a ->
-      g a
-        >>= \b ->
-          h b
-            >>= \c -> return (a, b, c)
+-- doSomething :: Int -> Maybe (Int, Int, String)
+-- doSomething n =
+--   f n
+--     >>= \a ->
+--       g a
+--         >>= \b ->
+--           h b
+--             >>= \c -> return (a, b, c)
 
 -- data GuessWhat = ChickenButt deriving (Eq, Show)
 

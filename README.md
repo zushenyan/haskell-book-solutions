@@ -50,3 +50,20 @@ rightIdentity m = m >>= return == m
 leftIdentity x f = return x >>= f == f x
 associativity m f g = ((m >>= f) >>= g) == (m >>= (\x -> f x >>= g))
 ```
+
+### Foldable Laws
+
+There is no laws for Foldable.
+
+### Traversable Laws
+
+A Traversable is also a Foldable and a Functor.
+
+```haskell
+import Data.Functor.Identity
+import Data.Functor.Compose
+
+naturality t f = t . traverse f == traverse (t . f)
+identity x = traverse Identity x == Identity x
+composition x = (sequenceA . fmap Compose $ x) == (Compose . fmap sequenceA . sequenceA $ x)
+```
