@@ -1,13 +1,28 @@
 module Lib where
 
-import Data.ByteString.Lazy hiding (map)
-import Network.Wreq
+import Control.Applicative
 
-urls :: [String]
-urls = ["http://httpbin.org/ip", "http://httpbin.org/bytes/5"]
+boop = (* 2)
 
-mappingGet :: [IO (Response ByteString)]
-mappingGet = map get urls
+doop = (+ 10)
+
+bip :: Int -> Int
+bip = boop . doop
+
+bloop :: Int -> Int
+bloop = fmap boop doop
+
+bbop :: Int -> Int
+bbop = (+) <$> boop <*> doop
+
+duwop :: Int -> Int
+duwop = liftA2 (+) boop doop
+
+boopDoop :: Int -> Int
+boopDoop = do
+  x <- boop
+  y <- doop
+  return (x + y)
 
 -- f :: Int -> Maybe Int
 -- f 0 = Nothing

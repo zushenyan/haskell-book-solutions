@@ -96,6 +96,12 @@ library
       Ch21Exercises
       SkiFree
       Ch21Tree
+      WarmingUp
+      Ask
+      ReadingComprehension      
+      ReaderMonad
+      Ch22Exercises
+      Ch22Shawty
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
@@ -116,6 +122,7 @@ library
       src/ch19
       src/ch20
       src/ch21
+      src/ch22
   build-depends:
       base >=4.7 && <5
     , time

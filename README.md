@@ -4,7 +4,7 @@ This repository is my own solutions to the [haskell book](https://haskellbook.co
 
 I won't go through every single exercise as I have already read the [Learn Yourself Haskell](http://learnyouahaskell.com/).
 
-Other solutions can be viewed [here](https://github.com/toraritte/haskell-book-solutions)
+Other solutions can be viewed [here](https://github.com/toraritte/haskell-book-solutions) or find dissucsions in [/r/HaskellBook](https://www.reddit.com/r/HaskellBook/) on reddit.
 
 # Personal Note
 
