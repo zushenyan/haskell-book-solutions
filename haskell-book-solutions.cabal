@@ -102,6 +102,10 @@ library
       ReaderMonad
       Ch22Exercises
       Ch22Shawty
+      RollYourOwn
+      WriteStateYourself
+      FizzBuzz
+      Ch23Exercises
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
@@ -123,6 +127,7 @@ library
       src/ch20
       src/ch21
       src/ch22
+      src/ch23
   build-depends:
       base >=4.7 && <5
     , time
