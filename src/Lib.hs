@@ -1,51 +1,50 @@
+{-# LANGUAGE QuasiQuotes #-}
+
 module Lib where
 
--- import Control.Applicative (liftA3)
--- import Control.Monad (replicateM)
--- import Control.Monad.Trans.State
--- import System.Random
+import Control.Applicative
+import Text.RawString.QQ
+import Text.Trifecta
 
--- data Die = One | Two | Three | Four | Five | Six deriving (Eq, Show)
+type NumberOrString = Either Integer String
 
--- intToDie :: Int -> Die
--- intToDie n = case n of
---   1 -> One
---   2 -> Two
---   3 -> Three
---   4 -> Four
---   5 -> Five
---   6 -> Six
---   _ -> error $ "intToDie got non 1-6 Integer: " ++ show n
+a :: String
+a = "blah"
 
--- rollDie :: State StdGen Die
--- rollDie = state $ do
---   (n, s) <- randomR (1, 6)
---   return (intToDie n, s)
+b :: String
+b = "123"
 
--- rollDie' :: State StdGen Die
--- rollDie' = intToDie <$> state (randomR (1, 6))
+c :: String
+c = "123blah789"
 
--- rollDieThreeTimes :: (Die, Die, Die)
--- rollDieThreeTimes = do
---   let range = (1, 6)
---       s = mkStdGen 0
---       (d1, s1) = randomR range s
---       (d2, s2) = randomR range s1
---       (d3, _) = randomR range s2
---   (intToDie d1, intToDie d2, intToDie d3)
+parseNos :: Parser NumberOrString
+parseNos = do
+  skipMany (oneOf "\n")
+  v <- (Left <$> integer) <|> (Right <$> some letter)
+  skipMany (oneOf "\n")
+  return v
 
--- rollDieThreeTimes' :: State StdGen (Die, Die, Die)
--- rollDieThreeTimes' = liftA3 (,,) rollDie rollDie rollDie
+eitherOr :: String
+eitherOr =
+  [r|
+123
+abc
+456
+def
+|]
 
--- nDie :: Int -> State StdGen [Die]
--- nDie n = replicateM n rollDie
+main :: IO ()
+main = do
+  let p f = parseString f mempty
+  print $ parseString (some parseNos) mempty eitherOr
 
--- rollsToGetTwenty :: StdGen -> Int
--- rollsToGetTwenty = go 0 0
---   where
---     go :: Int -> Int -> StdGen -> Int
---     go sum count gen
---       | sum >= 20 = count
---       | otherwise =
---         let (die, nextGen) = randomR (1, 6) gen
---          in go (sum + die) (count + 1) nextGen
+-- print $ p parseNos eitherOr
+
+-- print $ p (some letter) a
+-- print $ p integer b
+
+-- print $ p parseNos a
+-- print $ p parseNos b
+
+-- print $ p (many parseNos) c
+-- print $ p (some parseNos) c
