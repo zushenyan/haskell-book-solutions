@@ -1,50 +1,43 @@
-{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Lib where
 
 import Control.Applicative
-import Text.RawString.QQ
-import Text.Trifecta
+import Data.Attoparsec.ByteString (parseOnly)
+import qualified Data.Attoparsec.ByteString as A
+import Data.ByteString (ByteString)
+import Data.Text (Text)
+import Text.Parsec (Parsec, parseTest)
+import Text.Trifecta (CharParsing, Parser, Parsing ((<?>)), char, parseString, try)
 
-type NumberOrString = Either Integer String
+trifP :: Show a => Parser a -> String -> IO ()
+trifP p i = print $ parseString p mempty i
 
-a :: String
-a = "blah"
+parsecP :: Show a => Parsec String () a -> String -> IO ()
+parsecP = parseTest
 
-b :: String
-b = "123"
+attoP :: Show a => A.Parser a -> ByteString -> IO ()
+attoP p i = print $ parseOnly p i
 
-c :: String
-c = "123blah789"
+nobackParse :: (Monad m, CharParsing m) => m Char
+nobackParse = (char '1' >> char '2') <|> char '3'
 
-parseNos :: Parser NumberOrString
-parseNos = do
-  skipMany (oneOf "\n")
-  v <- (Left <$> integer) <|> (Right <$> some letter)
-  skipMany (oneOf "\n")
-  return v
+tryParse :: (Monad m, CharParsing m) => m Char
+tryParse = try (char '1' >> char '2') <|> char '3'
 
-eitherOr :: String
-eitherOr =
-  [r|
-123
-abc
-456
-def
-|]
+tryAnnot :: (Monad m, CharParsing m) => m Char
+tryAnnot = (try (char '1' >> char '2') <?> "Tried 12") <|> (char '3' <?> "Tried 3")
 
 main :: IO ()
 main = do
-  let p f = parseString f mempty
-  print $ parseString (some parseNos) mempty eitherOr
+  -- trifecta
+  trifP nobackParse "13"
+  trifP tryParse "13"
 
--- print $ p parseNos eitherOr
+  -- parsec
+  parsecP nobackParse "13"
+  parsecP tryParse "13"
 
--- print $ p (some letter) a
--- print $ p integer b
-
--- print $ p parseNos a
--- print $ p parseNos b
-
--- print $ p (many parseNos) c
--- print $ p (some parseNos) c
+  -- attoparsec
+  attoP nobackParse "13"
+  attoP tryParse "13"

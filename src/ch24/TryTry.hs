@@ -30,9 +30,9 @@ parseDecimal = do
 
 parseDof :: Parser DecimalOrFraction
 parseDof =
-  let l = Left <$> parseFraction
-      r = Right <$> parseDecimal
-   in try l <|> r
+  let l = Left <$> try parseFraction
+      r = Right <$> try parseDecimal
+   in l <|> r
 
 main :: IO ()
 main = do
