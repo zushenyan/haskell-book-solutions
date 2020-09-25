@@ -7,6 +7,7 @@ import Text.Trifecta
     Result (Success),
     anyChar,
     choice,
+    count,
     digit,
     dot,
     eof,
@@ -31,33 +32,17 @@ parsePhone :: Parser PhoneNumber
 parsePhone = PhoneNumber <$> parseNumberingPlanArea <*> parseExchange <*> parseLineNumber
 
 parseNumberingPlanArea :: Parser NumberingPlanArea
-parseNumberingPlanArea = choice [inParens, country, simple]
+parseNumberingPlanArea = choice [inParens, country, simple] >>= toInt
   where
-    simple = parse3Digits
+    simple = count 3 digit
     inParens = parens simple
     country = string "1-" >> simple
 
 parseExchange :: Parser Exchange
-parseExchange = optional (oneOf " -") >> parse3Digits
+parseExchange = optional (oneOf " -") >> count 3 digit >>= toInt
 
 parseLineNumber :: Parser LineNumber
-parseLineNumber = optional (oneOf " -") >> parse4Digits
-
--- "take 3 <$> some digit" doesn't work as "some" will iterate until it meets empty first
-parse3Digits :: Parser Int
-parse3Digits = do
-  a <- digit
-  b <- digit
-  c <- digit
-  toInt [a, b, c]
-
-parse4Digits :: Parser Int
-parse4Digits = do
-  a <- digit
-  b <- digit
-  c <- digit
-  d <- digit
-  toInt [a, b, c, d]
+parseLineNumber = optional (oneOf " -") >> count 4 digit >>= toInt
 
 toInt :: MonadFail m => String -> m Int
 toInt v =

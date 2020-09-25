@@ -113,6 +113,8 @@ library
       Semver
       ParseInteger
       CanadaPhone
+      LogFile
+      IPv4
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
