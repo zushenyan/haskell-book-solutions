@@ -115,6 +115,8 @@ library
       CanadaPhone
       LogFile
       IPv4
+      GOTCHA
+      Bifunctor
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
@@ -138,6 +140,7 @@ library
       src/ch22
       src/ch23
       src/ch24
+      src/ch25
   build-depends:
       base >=4.7 && <5
     , time
