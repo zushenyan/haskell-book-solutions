@@ -8,10 +8,13 @@ Other solutions can be viewed [here](https://github.com/toraritte/haskell-book-s
 
 # Personal Note
 
+## Laws
+
 ### Semigroup Laws
 
 ```haskell
-associative a b c = (a <> b) <> c == a <> (b <> c)
+associative a b c =
+  (a <> b) <> c == a <> (b <> c)
 ```
 
 ### Monoid Laws
@@ -19,15 +22,19 @@ associative a b c = (a <> b) <> c == a <> (b <> c)
 A Monoid is also a Semigroup.
 
 ```haskell
-leftIdentity a = a <> mempty == a
-rightIdentity a = mempty <> a == a
+leftIdentity a =
+   a <> mempty == a
+rightIdentity a =
+  mempty <> a == a
 ```
 
 ### Functor Laws
 
 ```haskell
-identity f = fmap id f == f
-composition f g x = fmap g (fmap f x) == fmap (g . f) x
+identity f =
+  fmap id f == f
+composition f g x =
+  fmap g (fmap f x) == fmap (g . f) x
 ```
 
 ### Applicative Laws
@@ -35,10 +42,14 @@ composition f g x = fmap g (fmap f x) == fmap (g . f) x
 An Applicative is also a Functor.
 
 ```haskell
-identity v = pure id <*> v == v
-compositiion u v w = pure (.) <*> u <*> v <*> w == u <*> v <*> w
-homomorphism f x = pure f <*> pure x = pure (f x)
-interchange u y = u <*> pure y = pure ($ y) <*> u
+identity v =
+  pure id <*> v == v
+compositiion u v w =
+  pure (.) <*> u <*> v <*> w == u <*> v <*> w
+homomorphism f x =
+  pure f <*> pure x = pure (f x)
+interchange u y =
+  u <*> pure y = pure ($ y) <*> u
 ```
 
 ### Monad Laws
@@ -46,9 +57,12 @@ interchange u y = u <*> pure y = pure ($ y) <*> u
 An Monad is a also an Applicative (is also a Functor.)
 
 ```haskell
-rightIdentity m = m >>= return == m
-leftIdentity x f = return x >>= f == f x
-associativity m f g = ((m >>= f) >>= g) == (m >>= (\x -> f x >>= g))
+rightIdentity m =
+  m >>= return == m
+leftIdentity x f =
+  return x >>= f == f x
+associativity m f g =
+  ((m >>= f) >>= g) == (m >>= (\x -> f x >>= g))
 ```
 
 ### Foldable Laws
@@ -63,7 +77,32 @@ A Traversable is also a Foldable and a Functor.
 import Data.Functor.Identity
 import Data.Functor.Compose
 
-naturality t f = t . traverse f == traverse (t . f)
-identity x = traverse Identity x == Identity x
-composition x = (sequenceA . fmap Compose $ x) == (Compose . fmap sequenceA . sequenceA $ x)
+naturality t f =
+  t . traverse f == traverse (t . f)
+identity x =
+  traverse Identity x == Identity x
+composition x =
+  (sequenceA . fmap Compose $ x) == (Compose . fmap sequenceA . sequenceA $ x)
+```
+
+---
+
+## What is Monad Transformer
+
+```haskell
+-- It's a type which can be reduced from
+Monad m => m (t (m b))
+-- to
+Monad m => m (m b)
+```
+
+Monad tranfromers usually use `T` to represent itself. For example, `IdentityT` is an monad transformer and the `T` represents the following in structure `Monad m => m (t (m b))`
+
+```haskell
+-- IdentityT :: f a -> IdentityT f a
+Monad m =>
+    m (T m b)
+->  m (m b)
+->  m b
+->  T m b
 ```
