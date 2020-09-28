@@ -106,3 +106,5 @@ Monad m =>
 ->  m b
 ->  T m b
 ```
+
+This is useful when you have nested monads but you want to move the `T` to the outermost (aka base type) position.

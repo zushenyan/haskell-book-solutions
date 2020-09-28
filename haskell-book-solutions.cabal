@@ -119,6 +119,11 @@ library
       Bifunctor
       EitherT
       StateT
+      WrapItUp
+      LiftMore
+      Someinstances
+      Ch26Exercises
+      FixTheCode
   other-modules:
       Paths_haskell_book_solutions
   hs-source-dirs:
