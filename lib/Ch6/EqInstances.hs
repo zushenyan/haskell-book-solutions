@@ -16,9 +16,9 @@ instance Eq TwoIntegers where
 data StringOrInt = TisAnInt Int | TisAString String
 
 instance Eq StringOrInt where
-  (==) (TisAnInt a) (TisAnInt b) = a == b
+  (==) (TisAnInt   a) (TisAnInt   b) = a == b
   (==) (TisAString a) (TisAString b) = a == b
-  (==) _ _ = False
+  (==) _              _              = False
 
 -- 4.
 data Pair a = Pair a a
@@ -38,12 +38,12 @@ data Which a = ThisOne a | ThatOne a
 instance (Eq a) => Eq (Which a) where
   (==) (ThisOne a) (ThisOne b) = a == b
   (==) (ThatOne a) (ThatOne b) = a == b
-  (==) _ _ = False
+  (==) _           _           = False
 
 -- 7.
 data EitherOr a b = Hello a | Goodbye b
 
 instance (Eq a, Eq b) => Eq (EitherOr a b) where
-  (==) (Hello a) (Hello b) = a == b
+  (==) (Hello   a) (Hello   b) = a == b
   (==) (Goodbye a) (Goodbye b) = a == b
-  (==) _ _ = False
+  (==) _           _           = False
