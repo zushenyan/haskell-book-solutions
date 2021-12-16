@@ -22,7 +22,9 @@ maintainer:         zushenyan@gmail.com
 extra-source-files: CHANGELOG.md
 
 library
-    build-depends: base
+    build-depends:
+        base
+        time
     hs-source-dirs: lib
     -- ghc-options:
     --     -Wall
