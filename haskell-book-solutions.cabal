@@ -23,7 +23,7 @@ extra-source-files: CHANGELOG.md
 
 library
     build-depends:
-        base
+        base,
         time
     hs-source-dirs: lib
     -- ghc-options:
