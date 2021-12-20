@@ -19,12 +19,15 @@ maintainer:         zushenyan@gmail.com
 -- A copyright notice.
 -- copyright:
 -- category:
-extra-source-files: CHANGELOG.md
+extra-source-files:
+    CHANGELOG.md
+    data/dict.txt
 
 library
     build-depends:
         base,
-        time
+        time,
+        random
     hs-source-dirs: lib
     -- ghc-options:
     --     -Wall
