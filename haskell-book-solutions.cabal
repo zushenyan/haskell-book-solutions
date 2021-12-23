@@ -27,7 +27,10 @@ library
     build-depends:
         base,
         time,
-        random
+        random,
+        hspec,
+        QuickCheck,
+        containers
     hs-source-dirs: lib
     -- ghc-options:
     --     -Wall

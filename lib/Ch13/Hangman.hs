@@ -38,7 +38,7 @@ randomWord (WordList gw) = do
 randomWord' :: IO String
 randomWord' = gameWords >>= randomWord
 
-data Puzzle = Puzzle String [Maybe Char] String
+data Puzzle = Puzzle String [Maybe Char] String deriving (Eq)
 
 instance Show Puzzle where
   show (Puzzle _ discovered guessed) = intersperse ' ' (fmap renderPuzzleChar discovered) ++ " Guessed so far: " ++ guessed
