@@ -30,6 +30,16 @@
   (major1) == 4 && (major2) <  14 || \
   (major1) == 4 && (major2) == 14 && (minor) <= 3)
 #endif /* MIN_VERSION_base */
+/* package checkers-0.5.6 */
+#ifndef VERSION_checkers
+#define VERSION_checkers "0.5.6"
+#endif /* VERSION_checkers */
+#ifndef MIN_VERSION_checkers
+#define MIN_VERSION_checkers(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  5 || \
+  (major1) == 0 && (major2) == 5 && (minor) <= 6)
+#endif /* MIN_VERSION_checkers */
 /* package containers-0.6.5.1 */
 #ifndef VERSION_containers
 #define VERSION_containers "0.6.5.1"
