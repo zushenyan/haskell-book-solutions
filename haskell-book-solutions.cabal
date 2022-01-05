@@ -31,7 +31,16 @@ library
         hspec,
         QuickCheck,
         checkers,
-        containers
+        containers,
+        uuid,
+        text,
+        bytestring,
+        hedis,
+        mtl,
+        network-uri,
+        scotty,
+        semigroups,
+        transformers
     hs-source-dirs: lib
     -- ghc-options:
     --     -Wall
