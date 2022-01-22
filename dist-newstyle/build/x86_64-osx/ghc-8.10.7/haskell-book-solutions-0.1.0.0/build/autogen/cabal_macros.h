@@ -170,6 +170,16 @@
   (major1) == 1 && (major2) <  3 || \
   (major1) == 1 && (major2) == 3 && (minor) <= 15)
 #endif /* MIN_VERSION_uuid */
+/* package wreq-0.5.3.3 */
+#ifndef VERSION_wreq
+#define VERSION_wreq "0.5.3.3"
+#endif /* VERSION_wreq */
+#ifndef MIN_VERSION_wreq
+#define MIN_VERSION_wreq(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  5 || \
+  (major1) == 0 && (major2) == 5 && (minor) <= 3)
+#endif /* MIN_VERSION_wreq */
 
 /* tool gcc-13.0.0 */
 #ifndef TOOL_VERSION_gcc

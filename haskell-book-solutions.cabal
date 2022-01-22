@@ -40,7 +40,8 @@ library
         network-uri,
         scotty,
         semigroups,
-        transformers
+        transformers,
+        wreq
     hs-source-dirs: lib
     -- ghc-options:
     --     -Wall
