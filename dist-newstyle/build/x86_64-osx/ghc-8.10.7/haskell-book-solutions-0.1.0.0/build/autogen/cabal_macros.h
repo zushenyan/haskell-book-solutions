@@ -60,6 +60,16 @@
   (major1) == 0 && (major2) <  6 || \
   (major1) == 0 && (major2) == 6 && (minor) <= 5)
 #endif /* MIN_VERSION_containers */
+/* package dlist-1.0 */
+#ifndef VERSION_dlist
+#define VERSION_dlist "1.0"
+#endif /* VERSION_dlist */
+#ifndef MIN_VERSION_dlist
+#define MIN_VERSION_dlist(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  0 || \
+  (major1) == 1 && (major2) == 0 && (minor) <= 0)
+#endif /* MIN_VERSION_dlist */
 /* package hedis-0.15.0 */
 #ifndef VERSION_hedis
 #define VERSION_hedis "0.15.0"

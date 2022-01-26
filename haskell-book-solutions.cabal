@@ -41,7 +41,8 @@ library
         scotty,
         semigroups,
         transformers,
-        wreq
+        wreq,
+        dlist
     hs-source-dirs: lib
     -- ghc-options:
     --     -Wall
