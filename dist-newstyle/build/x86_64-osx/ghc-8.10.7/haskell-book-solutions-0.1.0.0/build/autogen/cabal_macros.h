@@ -170,6 +170,16 @@
   (major1) == 0 && (major2) <  5 || \
   (major1) == 0 && (major2) == 5 && (minor) <= 6)
 #endif /* MIN_VERSION_transformers */
+/* package trifecta-2.1.2 */
+#ifndef VERSION_trifecta
+#define VERSION_trifecta "2.1.2"
+#endif /* VERSION_trifecta */
+#ifndef MIN_VERSION_trifecta
+#define MIN_VERSION_trifecta(major1,major2,minor) (\
+  (major1) <  2 || \
+  (major1) == 2 && (major2) <  1 || \
+  (major1) == 2 && (major2) == 1 && (minor) <= 2)
+#endif /* MIN_VERSION_trifecta */
 /* package uuid-1.3.15 */
 #ifndef VERSION_uuid
 #define VERSION_uuid "1.3.15"

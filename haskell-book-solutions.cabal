@@ -42,7 +42,8 @@ library
         semigroups,
         transformers,
         wreq,
-        dlist
+        dlist,
+        trifecta
     hs-source-dirs: lib
     -- ghc-options:
     --     -Wall
