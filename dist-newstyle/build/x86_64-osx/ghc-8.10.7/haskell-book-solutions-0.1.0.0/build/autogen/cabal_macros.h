@@ -110,6 +110,16 @@
   (major1) == 2 && (major2) <  6 || \
   (major1) == 2 && (major2) == 6 && (minor) <= 4)
 #endif /* MIN_VERSION_network_uri */
+/* package parsers-0.12.10 */
+#ifndef VERSION_parsers
+#define VERSION_parsers "0.12.10"
+#endif /* VERSION_parsers */
+#ifndef MIN_VERSION_parsers
+#define MIN_VERSION_parsers(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  12 || \
+  (major1) == 0 && (major2) == 12 && (minor) <= 10)
+#endif /* MIN_VERSION_parsers */
 /* package random-1.2.1 */
 #ifndef VERSION_random
 #define VERSION_random "1.2.1"

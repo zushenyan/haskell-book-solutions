@@ -43,7 +43,8 @@ library
         transformers,
         wreq,
         dlist,
-        trifecta
+        trifecta,
+        parsers
     hs-source-dirs: lib
     -- ghc-options:
     --     -Wall
