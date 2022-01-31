@@ -1,40 +1,61 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Ch24.Exe where
 
+import Control.Applicative
+import Data.Ratio
 import Text.Trifecta
 
-stop :: Parser a
-stop = unexpected "stop"
+badFraction :: [Char]
+badFraction = "1/0"
 
-one :: Parser Char
-one = char '1'
+alsoBad :: [Char]
+alsoBad = "10"
 
-one' :: Parser b
-one' = one >> stop
+shouldWork :: [Char]
+shouldWork = "1/2"
 
-oneTwo :: Parser Char
-oneTwo = char '1' >> char '2'
+shouldAlsoWork :: [Char]
+shouldAlsoWork = "2/1"
 
-oneTwo' :: Parser b
-oneTwo' = oneTwo >> stop
+parseFraction :: Parser Rational
+parseFraction = do
+  numerator <- decimal
+  char '/'
+  denominator <- decimal
+  case denominator of
+    0 -> fail "denomintor cannot be zero"
+    _ -> return $ numerator % denominator
 
-testParse :: Parser Char -> IO ()
-testParse p = do
-  print $ parseString p mempty "123"
-
-pNL s = putStrLn $ '\n' : s
-
+main :: IO ()
 main = do
-  pNL "stop:"
-  testParse stop
+  let pf = parseString parseFraction mempty
+  print $ pf badFraction
+  print $ pf alsoBad
+  print $ pf shouldWork
+  print $ pf shouldAlsoWork
 
-  pNL "one:"
-  testParse one
+--
+type NumberOrString = Either Integer String
 
-  pNL "one':"
-  testParse one'
+a :: [Char]
+a = "blah"
 
-  pNL "oneTwo:"
-  testParse oneTwo
+b :: [Char]
+b = "123"
 
-  pNL "oneTwo':"
-  testParse oneTwo'
+c :: [Char]
+c = "123blah789"
+
+parseNos :: Parser NumberOrString
+parseNos = (Left <$> integer) <|> (Right <$> some letter)
+
+run2 :: IO ()
+run2 = do
+  let p f = parseString f mempty
+  print $ p (some letter) a
+  print $ p integer b
+  print $ p parseNos a
+  print $ p parseNos b
+  print $ p (many parseNos) c
+  print $ p (some parseNos) c

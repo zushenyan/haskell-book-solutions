@@ -44,7 +44,8 @@ library
         wreq,
         dlist,
         trifecta,
-        parsers
+        parsers,
+        raw-strings-qq
     hs-source-dirs: lib
     -- ghc-options:
     --     -Wall

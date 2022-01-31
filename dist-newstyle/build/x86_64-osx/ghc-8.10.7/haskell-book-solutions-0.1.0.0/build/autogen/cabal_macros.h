@@ -130,6 +130,16 @@
   (major1) == 1 && (major2) <  2 || \
   (major1) == 1 && (major2) == 2 && (minor) <= 1)
 #endif /* MIN_VERSION_random */
+/* package raw-strings-qq-1.1 */
+#ifndef VERSION_raw_strings_qq
+#define VERSION_raw_strings_qq "1.1"
+#endif /* VERSION_raw_strings_qq */
+#ifndef MIN_VERSION_raw_strings_qq
+#define MIN_VERSION_raw_strings_qq(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  1 || \
+  (major1) == 1 && (major2) == 1 && (minor) <= 0)
+#endif /* MIN_VERSION_raw_strings_qq */
 /* package scotty-0.12 */
 #ifndef VERSION_scotty
 #define VERSION_scotty "0.12"
