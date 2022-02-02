@@ -20,6 +20,26 @@
   (major1) == 2 && (major2) <  14 || \
   (major1) == 2 && (major2) == 14 && (minor) <= 2)
 #endif /* MIN_VERSION_QuickCheck */
+/* package aeson-2.0.3.0 */
+#ifndef VERSION_aeson
+#define VERSION_aeson "2.0.3.0"
+#endif /* VERSION_aeson */
+#ifndef MIN_VERSION_aeson
+#define MIN_VERSION_aeson(major1,major2,minor) (\
+  (major1) <  2 || \
+  (major1) == 2 && (major2) <  0 || \
+  (major1) == 2 && (major2) == 0 && (minor) <= 3)
+#endif /* MIN_VERSION_aeson */
+/* package attoparsec-0.14.4 */
+#ifndef VERSION_attoparsec
+#define VERSION_attoparsec "0.14.4"
+#endif /* VERSION_attoparsec */
+#ifndef MIN_VERSION_attoparsec
+#define MIN_VERSION_attoparsec(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  14 || \
+  (major1) == 0 && (major2) == 14 && (minor) <= 4)
+#endif /* MIN_VERSION_attoparsec */
 /* package base-4.14.3.0 */
 #ifndef VERSION_base
 #define VERSION_base "4.14.3.0"
@@ -110,6 +130,16 @@
   (major1) == 2 && (major2) <  6 || \
   (major1) == 2 && (major2) == 6 && (minor) <= 4)
 #endif /* MIN_VERSION_network_uri */
+/* package parsec-3.1.14.0 */
+#ifndef VERSION_parsec
+#define VERSION_parsec "3.1.14.0"
+#endif /* VERSION_parsec */
+#ifndef MIN_VERSION_parsec
+#define MIN_VERSION_parsec(major1,major2,minor) (\
+  (major1) <  3 || \
+  (major1) == 3 && (major2) <  1 || \
+  (major1) == 3 && (major2) == 1 && (minor) <= 14)
+#endif /* MIN_VERSION_parsec */
 /* package parsers-0.12.10 */
 #ifndef VERSION_parsers
 #define VERSION_parsers "0.12.10"
@@ -140,6 +170,16 @@
   (major1) == 1 && (major2) <  1 || \
   (major1) == 1 && (major2) == 1 && (minor) <= 0)
 #endif /* MIN_VERSION_raw_strings_qq */
+/* package scientific-0.3.7.0 */
+#ifndef VERSION_scientific
+#define VERSION_scientific "0.3.7.0"
+#endif /* VERSION_scientific */
+#ifndef MIN_VERSION_scientific
+#define MIN_VERSION_scientific(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  3 || \
+  (major1) == 0 && (major2) == 3 && (minor) <= 7)
+#endif /* MIN_VERSION_scientific */
 /* package scotty-0.12 */
 #ifndef VERSION_scotty
 #define VERSION_scotty "0.12"

@@ -45,7 +45,11 @@ library
         dlist,
         trifecta,
         parsers,
-        raw-strings-qq
+        raw-strings-qq,
+        attoparsec,
+        parsec,
+        aeson,
+        scientific
     hs-source-dirs: lib
     -- ghc-options:
     --     -Wall
